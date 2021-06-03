@@ -1,2 +1,2 @@
-# statistics_visualizations
-programs to create intuitive visualizations of fundamental statistical methods
+# Statistics Visualizations
+Programs that create intuitive visualizations of fundamental statistical methods
