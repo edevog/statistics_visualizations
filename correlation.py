@@ -14,13 +14,24 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 """
-This program calculates the Spearman Correlation of a data frame, the Confidence Interval and p-value for each correlation, and creates a bar graph for each dependent variable of its correlation to the independent variables with the Confidence Interval as the error bars and the p-value as stars.
-
+This program calculates the Spearman Correlation of a data frame, the Confidence Interval 
+and p-value for each correlation, and creates a bar graph for each dependent variable of its 
+correlation to the independent variables with the Confidence Interval as the error bars and 
+the p-value as stars.
 """
 
 
 class SpearmanCorrelation:
-    """docstring for SpearmanCorrelation."""
+    """
+    This class contains the methods to calculate the rho, ci, and p-value for a spearman correlation 
+    and output a bar graph visualization
+    
+    Attributes:
+        df = a pandas dataframe with all independent and depdent metrics as columns
+        rho = a pandas dataframe of the Spearman correlation coefficients for all metrics
+        ci = a pandas dataframe of the confidence interval for all Spearman correlations
+        pval = a pandas dataframe of the p-values for all Spearman correlations
+    """
 
     def __init__(self, df):
         self.df = df
@@ -68,18 +79,27 @@ class SpearmanCorrelation:
         creates a barplot for each dependent variable of its correlation to all independent variables with the confidence interval as error bars and the p-value represented by stars
         """
         plt.style.use('seaborn-white')
+        # iterate over all dependent variables
         for d in dependent_variables:
+            # create a new plot for each dependent variable
             fig, ax = plt.subplots(figsize=(3,4/11*len(independent_variables)))
+            # plot a horizontal bar plot with the Confidence Interval as error bars
             ax.barh(width=self.rho.loc[independent_variables, d], y=independent_variables,
                     xerr=np.stack(self.ci.loc[independent_variables, d], axis=0).T,
                     color='gray'
                     )
+            # iterate over all independent variables
             for i in independent_variables:
+                # store the p-value for the independent and dependent variable combination in an object
                 p = self.stars(self.pval.loc[i,d])
+#               # include the p-value translated into stars for each correlation in the bar plot
                 if self.rho[d][i] > 0:
                     ax.text(s=p, x=self.rho.loc[i,d]+self.ci.loc[i,d][1]+0.01, y=independent_variables.index(i)-0.44, fontsize=15)
                 else:
                     ax.text(s=p, x=self.rho.loc[i,d]-self.ci.loc[i,d][0]-0.01, y=independent_variables.index(i)-0.44, fontsize=15)
+            # set the axis range
             plt.xlim(-1,1)
+            # set the plot title
             plt.title(d)
+            # save the figure to the specified directory and name
             plt.savefig(file_path+file_name_prefix+d+'.png', dpi=300, bbox_inches='tight')
