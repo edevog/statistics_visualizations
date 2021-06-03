@@ -1,3 +1,9 @@
+#!/usr/bin/env python3
+# Name: Beth DeVogelaere
+# Date: 2021-06-03
+# Github acct: edevog
+
+
 import pandas as pd
 import numpy as np
 
