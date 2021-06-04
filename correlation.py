@@ -14,18 +14,18 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 """
-This program calculates the Spearman Correlation of a data frame, the Confidence Interval 
-and p-value for each correlation, and creates a bar graph for each dependent variable of its 
-correlation to the independent variables with the Confidence Interval as the error bars and 
+This program calculates the Spearman Correlation of a data frame, the Confidence Interval
+and p-value for each correlation, and creates a bar graph for each dependent variable of its
+correlation to the independent variables with the Confidence Interval as the error bars and
 the p-value as stars.
 """
 
 
 class SpearmanCorrelation:
     """
-    This class contains the methods to calculate the rho, ci, and p-value for a spearman correlation 
+    This class contains the methods to calculate the rho, ci, and p-value for a spearman correlation
     and output a bar graph visualization
-    
+
     Attributes:
         df = a pandas dataframe with all independent and depdent metrics as columns
         rho = a pandas dataframe of the Spearman correlation coefficients for all metrics
@@ -78,6 +78,10 @@ class SpearmanCorrelation:
         """
         creates a barplot for each dependent variable of its correlation to all independent variables with the confidence interval as error bars and the p-value represented by stars
         """
+        if not isinstance(dependent_variables, list) & isinstance(independent_variables, list):
+            raise Exception(
+                "dependent_varialbes and independent_variables must be list objects")
+
         plt.style.use('seaborn-white')
         # iterate over all dependent variables
         for d in dependent_variables:
