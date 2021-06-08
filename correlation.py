@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Name: Beth DeVogelaere
-# Date: 2021-06-03
+# Date: 2021-06-08
 # Github acct: edevog
 
 
@@ -74,7 +74,7 @@ class SpearmanCorrelation:
 
         return rho, pval, ci
 
-    def plot_correlation(self, dependent_variables, independent_variables, file_path='./', file_name_prefix='correlation'):
+    def plot_correlation(self, dependent_variables, independent_variables, color ='gray', file_path='./', file_name_prefix='correlation'):
         """
         creates a barplot for each dependent variable of its correlation to all independent variables with the confidence interval as error bars and the p-value represented by stars
         """
@@ -90,7 +90,7 @@ class SpearmanCorrelation:
             # plot a horizontal bar plot with the Confidence Interval as error bars
             ax.barh(width=self.rho.loc[independent_variables, d], y=independent_variables,
                     xerr=np.stack(self.ci.loc[independent_variables, d], axis=0).T,
-                    color='gray'
+                    color=color
                     )
             # iterate over all independent variables
             for i in independent_variables:
