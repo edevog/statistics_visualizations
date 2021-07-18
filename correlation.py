@@ -27,10 +27,10 @@ class SpearmanCorrelation:
     and output a bar graph visualization
 
     Attributes:
-        df = a pandas dataframe with all independent and depdent metrics as columns
-        rho = a pandas dataframe of the Spearman correlation coefficients for all metrics
-        ci = a pandas dataframe of the confidence interval for all Spearman correlations
-        pval = a pandas dataframe of the p-values for all Spearman correlations
+        df = a pandas data frame with all independent and dependent metrics as columns
+        rho = a pandas data frame of the Spearman correlation coefficients for all metrics
+        ci = a pandas data frame of the confidence interval for all Spearman correlations
+        pval = a pandas data frame of the p-values for all Spearman correlations
     """
 
     def __init__(self, df):
@@ -38,7 +38,7 @@ class SpearmanCorrelation:
         self.rho, self.pval, self.ci = self.corr_ci_p_analysis()
 
     def spearman_ci(self, r, n):
-        """Calculates the Confidence Interval for the Spearman corrlation using the corrlation value (r) and the sample size (n)"""
+        """Calculates the Confidence Interval for the Spearman correlation using the correlation value (r) and the sample size (n)"""
         if r == 1:
             return None
         stderr = 1.0 / math.sqrt(n - 3)
@@ -65,7 +65,7 @@ class SpearmanCorrelation:
 
     def corr_ci_p_analysis(self):
         """
-        calculates the spearman correlation of all columns in the data frame, calculates the confidence interval and p-value for each correlation, then combines all calculated values and correlation values into a single data frame.
+        calculates the Spearman correlation of all columns in the data frame, calculates the confidence interval and p-value for each correlation, then combines all calculated values and correlation values into a single data frame.
         """
 
         rho = self.df.corr(method='spearman').round(4)
