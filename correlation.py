@@ -46,7 +46,7 @@ class SpearmanCorrelation:
         lower = math.tanh(math.atanh(r) - delta)
         upper = math.tanh(math.atanh(r) + delta)
 
-        return np.array([round(r - lower, 2), round(upper - r, 2)])
+        return np.array([round(lower, 2), round(upper, 2)])
 
 
     def stars(self, p):
